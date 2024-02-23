@@ -1,11 +1,12 @@
+import 'package:intl/intl.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
 
 class AppFunctions {
-  // static String timestampToDateTime(String timestamp) {
-  //   var date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
-  //   final f = DateFormat('dd MMM yyyy hh:mm a');
-  //   return f.format(date).toString();
-  // }
+  static String getDateTime(String value) {
+    var date = DateTime.parse(value);
+    final f = DateFormat('MMM dd, yyyy');
+    return f.format(date).toString();
+  }
 
   static logout() async {
     StorageHelper().removeUser();

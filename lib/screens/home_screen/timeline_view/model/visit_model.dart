@@ -6,9 +6,9 @@ class VisitModel {
 
   VisitModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <VisitData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(VisitData.fromJson(v));
       });
     }
     message = json['message'];
@@ -34,9 +34,9 @@ class VisitData {
   String? npi1;
   String? npi2;
   Resources? resources;
-  List<NewDocs>? newDocs;
+  // List<NewDocs>? newDocs;
   bool? passToGpt;
-  List<Null>? tasksForUser;
+  // List<dynamic>? tasksForUser;
   List<String>? instructionsForUser;
   String? longSummary;
   String? shortSummary;
@@ -57,9 +57,9 @@ class VisitData {
       this.npi1,
       this.npi2,
       this.resources,
-      this.newDocs,
+      // this.newDocs,
       this.passToGpt,
-      this.tasksForUser,
+      // this.tasksForUser,
       this.instructionsForUser,
       this.longSummary,
       this.shortSummary,
@@ -74,9 +74,8 @@ class VisitData {
     sId = json['_id'];
     dateStart = json['dateStart'];
     dateEnd = json['dateEnd'];
-    serverId = json['serverId'] != null
-        ? ServerId.fromJson(json['serverId'])
-        : null;
+    serverId =
+        json['serverId'] != null ? ServerId.fromJson(json['serverId']) : null;
     visitType = json['visitType'];
     visitTypeSource = json['visitTypeSource'];
     npi1 = json['npi1'];
@@ -84,19 +83,19 @@ class VisitData {
     resources = json['resources'] != null
         ? Resources.fromJson(json['resources'])
         : null;
-    if (json['newDocs'] != null) {
-      newDocs = <NewDocs>[];
-      json['newDocs'].forEach((v) {
-        newDocs!.add(NewDocs.fromJson(v));
-      });
-    }
+    // if (json['newDocs'] != null) {
+    //   newDocs = <NewDocs>[];
+    //   json['newDocs'].forEach((v) {
+    //     newDocs!.add(NewDocs.fromJson(v));
+    //   });
+    // }
     passToGpt = json['pass_to_gpt'];
-    if (json['tasksForUser'] != null) {
-      tasksForUser = <Null>[];
-      json['tasksForUser'].forEach((v) {
-        tasksForUser!.add(Null.fromJson(v));
-      });
-    }
+    // if (json['tasksForUser'] != null) {
+    //   // tasksForUser = <dynamic>[];
+    //   // json['tasksForUser'].forEach((v) {
+    //   //   tasksForUser!.add(dynamic.fromJson(v));
+    //   // });
+    // }
     instructionsForUser = json['instructionsForUser'].cast<String>();
     longSummary = json['longSummary'];
     shortSummary = json['shortSummary'];
@@ -126,16 +125,16 @@ class VisitData {
     data['visitTypeSource'] = visitTypeSource;
     data['npi1'] = npi1;
     data['npi2'] = npi2;
-    if (resources != null) {
-      data['resources'] = resources!.toJson();
-    }
-    if (newDocs != null) {
-      data['newDocs'] = newDocs!.map((v) => v.toJson()).toList();
-    }
+    // if (resources != null) {
+    //   data['resources'] = resources!.toJson();
+    // }
+    // if (newDocs != null) {
+    //   data['newDocs'] = newDocs!.map((v) => v.toJson()).toList();
+    // }
     data['pass_to_gpt'] = passToGpt;
-    if (tasksForUser != null) {
-      data['tasksForUser'] = tasksForUser!.map((v) => v.toJson()).toList();
-    }
+    // if (tasksForUser != null) {
+    //   data['tasksForUser'] = tasksForUser!.map((v) => v.toJson()).toList();
+    // }
     data['instructionsForUser'] = instructionsForUser;
     data['longSummary'] = longSummary;
     data['shortSummary'] = shortSummary;
@@ -172,58 +171,23 @@ class ServerId {
 }
 
 class Resources {
-  List<String>? explanationOfBenefit;
-  List<String>? encounter;
-  List<String>? procedure;
-  List<String>? diagnosticReport;
   List<String>? documentReference;
-  List<String>? condition;
-  List<String>? medicationRequest;
-  List<String>? immunization;
-  List<String>? vitals;
-  List<String>? labs;
-  List<String>? allergyIntolerance;
 
-  Resources(
-      {this.explanationOfBenefit,
-      this.encounter,
-      this.procedure,
-      this.diagnosticReport,
-      this.documentReference,
-      this.condition,
-      this.medicationRequest,
-      this.immunization,
-      this.vitals,
-      this.labs,
-      this.allergyIntolerance});
+  Resources({
+    this.documentReference,
+  });
 
   Resources.fromJson(Map<String, dynamic> json) {
-    explanationOfBenefit = json['ExplanationOfBenefit'].cast<String>();
-    encounter = json['Encounter'].cast<String>();
-    procedure = json['Procedure'].cast<String>();
-    diagnosticReport = json['DiagnosticReport'].cast<String>();
-    documentReference = json['DocumentReference'].cast<String>();
-    condition = json['Condition'].cast<String>();
-    medicationRequest = json['MedicationRequest'].cast<String>();
-    immunization = json['Immunization'].cast<String>();
-    vitals = json['Vitals'].cast<String>();
-    labs = json['Labs'].cast<String>();
-    allergyIntolerance = json['AllergyIntolerance'].cast<String>();
+    if (json['DocumentReference'] != null) {
+      documentReference = json['DocumentReference'].cast<String>();
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['ExplanationOfBenefit'] = explanationOfBenefit;
-    data['Encounter'] = encounter;
-    data['Procedure'] = procedure;
-    data['DiagnosticReport'] = diagnosticReport;
+    final Map<String, dynamic> data = <String, dynamic>{};
+
     data['DocumentReference'] = documentReference;
-    data['Condition'] = condition;
-    data['MedicationRequest'] = medicationRequest;
-    data['Immunization'] = immunization;
-    data['Vitals'] = vitals;
-    data['Labs'] = labs;
-    data['AllergyIntolerance'] = allergyIntolerance;
+
     return data;
   }
 }
@@ -234,9 +198,9 @@ class NewDocs {
   String? type;
   String? startDate;
   String? endDate;
-  Null? npi1;
-  Null? practitioner;
-  Null? costOfCare;
+  String? npi1;
+  String? practitioner;
+  String? costOfCare;
   List<Codes>? codes;
   String? practioner;
   String? location;
@@ -246,19 +210,19 @@ class NewDocs {
   String? lastUpdated;
   String? verificationStatus;
   String? category;
-  Null? dosageStart;
-  Null? dosageEnd;
-  Null? dosageFrequency;
-  Null? periodUnit;
-  Null? asNeededBoolean;
-  Null? patientInstruction;
+  String? dosageStart;
+  String? dosageEnd;
+  String? dosageFrequency;
+  String? periodUnit;
+  String? asNeededBoolean;
+  String? patientInstruction;
   bool? outOfRange;
   String? unit;
-  Null? comment;
-  Null? referenceRange;
-  Null? low;
-  Null? high;
-  Null? reaction;
+  String? comment;
+  String? referenceRange;
+  String? low;
+  String? high;
+  String? reaction;
 
   NewDocs(
       {this.resourceType,
@@ -294,8 +258,7 @@ class NewDocs {
 
   NewDocs.fromJson(Map<String, dynamic> json) {
     resourceType = json['resourceType'];
-    source =
-        json['source'] != null ? Source.fromJson(json['source']) : null;
+    source = json['source'] != null ? Source.fromJson(json['source']) : null;
     type = json['type'];
     startDate = json['startDate'];
     endDate = json['endDate'];
@@ -423,6 +386,10 @@ class ValidatedTasksForUser {
   String? task;
   String? status;
   String? note;
+  String? sId;
+  String? dateStart;
+  String? npi1;
+  String? npi2;
 
   ValidatedTasksForUser({this.id, this.task, this.status, this.note});
 

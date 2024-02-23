@@ -5,4 +5,7 @@ class ApiUtils {
 
   //endpoint
   static String login = "auth/login";
+  static String visits = "visits";
+  static String resources = "resources";
+  static String addNote = "visits/task/complete";
 }

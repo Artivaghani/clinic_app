@@ -19,6 +19,7 @@ class Appdimens {
   static double get dimen22 => Get.height * 0.022;
   static double get dimen24 => Get.height * 0.024;
   static double get dimen26 => Get.height * 0.026;
+  static double get dimen28 => Get.height * 0.028;
   static double get dimen32 => Get.height * 0.032;
   static double get dimen35 => Get.height * 0.035;
   static double get dimen40 => Get.height * 0.040;
