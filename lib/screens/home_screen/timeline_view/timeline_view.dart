@@ -1,7 +1,6 @@
 import 'package:pocket_clinic/screens/home_screen/home_container.dart';
 import 'package:pocket_clinic/screens/home_screen/timeline_view/timeline_card/timeline_card.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
-import 'package:pocket_clinic/widgets/app_btn.dart';
 
 class TimeLineview extends StatelessWidget {
   TimeLineview({super.key});

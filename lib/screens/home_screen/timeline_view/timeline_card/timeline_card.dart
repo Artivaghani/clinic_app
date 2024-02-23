@@ -37,7 +37,9 @@ class TimeLineCard extends StatelessWidget {
                             children: [
                               leftView(controller),
                               if (controller.isExpand) sideView(),
-                              if (!controller.isExpand) taskCountView().paddingOnly(top: Appdimens.dimen30)
+                              if (!controller.isExpand)
+                                taskCountView()
+                                    .paddingOnly(top: Appdimens.dimen30)
                             ],
                           )
                         : Row(
@@ -187,7 +189,8 @@ class TimeLineCard extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 4,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.9,
+                      childAspectRatio:
+                          Appdimens.screenHeight < 800 ? 0.78 : 0.9,
                       crossAxisSpacing: Appdimens.dimen20,
                       mainAxisSpacing: Appdimens.dimen20,
                       crossAxisCount: 3),
@@ -332,6 +335,7 @@ class TimeLineCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             'Inform MN about AFC at Baseline, CD3 E2, HCG + Lupron Option',
+                            maxLines: 3,
                             style: Get.theme.textTheme.labelMedium!.copyWith(
                                 color:
                                     AppColors.secondaryColor.withOpacity(0.4),

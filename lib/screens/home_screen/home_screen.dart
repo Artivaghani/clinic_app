@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
+   print(StorageHelper().getToken);
     return GetBuilder(
         init: HomeController(),
         builder: (controller) {

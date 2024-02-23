@@ -1,4 +1,5 @@
 import 'package:pocket_clinic/screens/home_screen/home_screen.dart';
+import 'package:pocket_clinic/screens/login_screen/login_screen.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -25,12 +26,12 @@ class SplashScreen extends StatelessWidget {
               Future.delayed(
                 const Duration(seconds: 3),
                 () {
-                  // if (StorageHelper().isLoggedIn) {
+                  if (StorageHelper().isLoggedIn) {
                   Get.offUntil(GetPageRoute(page: () => const HomeScreen()),
                       (route) => false);
-                  // } else {
-                  //   Get.off( LoginScreen());
-                  // }
+                  } else {
+                    Get.off( LoginScreen());
+                  }
                 },
               );
               return splashData();
@@ -53,7 +54,7 @@ class SplashScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   AppImages.logo,
-                ),
+                ).paddingAll(Appdimens.dimen30),
               ],
             ),
           ),

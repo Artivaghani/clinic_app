@@ -19,10 +19,14 @@ Widget appButton(String title,
               RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(10),
           ))),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: style ?? Get.theme.textTheme.headlineSmall,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          title,
+          maxLines: 1,
+          textAlign: TextAlign.center,
+          style: style ?? Get.theme.textTheme.headlineSmall,
+        ),
       ),
     ),
   );

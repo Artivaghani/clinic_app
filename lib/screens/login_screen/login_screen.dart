@@ -1,7 +1,5 @@
 import 'package:pocket_clinic/screens/login_screen/login_controller.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
-import 'package:pocket_clinic/utils/app_validation.dart';
-import 'package:pocket_clinic/widgets/app_btn.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

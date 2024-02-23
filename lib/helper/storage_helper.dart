@@ -1,26 +1,21 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:pocket_clinic/screens/login_screen/login_screen.dart';
+import 'package:pocket_clinic/utils/app_config.dart';
 
 class StorageHelper {
   get storage => GetStorage();
 
-  set saveTheme(bool value) => storage.write("isDark", value);
-  bool? get getTheme => storage.read('isDark');
-
   removeUser() {
     storage.remove('isLoggedIn');
-    storage.remove('loginData');
+    storage.remove('accessToken');
+    Get.offAll(() => LoginScreen());
   }
 
   set isLoggedIn(bool value) => storage.write("isLoggedIn", value);
   bool get isLoggedIn => storage.read('isLoggedIn') ?? false;
 
-
-
-  set isGetFree(bool value) => storage.write("isGetFree", value);
-  bool get isGetFree => storage.read('isGetFree') ?? false;
-
-  set saveAdDate(String value) => storage.write("adDate", value);
-  String get getAdDate => storage.read('adDate') ?? '';
+  set saveToken(String value) => storage.write("accessToken", value);
+  String get getToken => storage.read('accessToken') ?? '';
 
   // set loginData(LoginData data) =>
   //     storage.write("loginData", json.encode(data));

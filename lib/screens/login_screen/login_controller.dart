@@ -1,6 +1,7 @@
 import 'package:pocket_clinic/api_helpers/api_manager.dart';
 import 'package:pocket_clinic/api_helpers/api_param.dart';
 import 'package:pocket_clinic/api_helpers/api_utils.dart';
+import 'package:pocket_clinic/screens/home_screen/home_screen.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
 
 class LoginController extends GetxController {
@@ -12,13 +13,14 @@ class LoginController extends GetxController {
   login() {
     if (formKey.currentState!.validate()) {
       AppDialogs.showProcess();
-      ApiManager.callPost({ApiParam.email: email.text}, ApiUtils.login)
-          .then((value) {
-        // AuthModel authModel = AuthModel.fromJson(value);
-        // StorageHelper().authData = authModel.data!;
-        // StorageHelper().isLoggedIn = true;
-        // Get.offAll(() => MainScreen());
-        // AppDialogs.successSnackBar(authModel.reason.toString());
+      ApiManager.callPost({ApiParam.email: email.text}, ApiUtils.login,
+          headers: {
+            'Content-Type': 'application/json',
+          }).then((value) {
+        StorageHelper().saveToken = value['accessToken'].toString();
+        StorageHelper().isLoggedIn = true;
+        Get.offAll(() => const HomeScreen());
+        AppDialogs.successSnackBar(AppStrings.loginSuccess);
       }).onError((error, stackTrace) {
         Get.back();
         AppDialogs.errorSnackBar(error.toString());

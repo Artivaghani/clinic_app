@@ -29,6 +29,7 @@ class AppStrings {
 
   //msg
 
+  static String loginSuccess = 'You have been successfully logged in';
   static String checkConnection = 'Check your internet connection';
   static String dataNotFound = 'Data not found!';
   static String errorMsg = 'Something went wrong, Please try again later';

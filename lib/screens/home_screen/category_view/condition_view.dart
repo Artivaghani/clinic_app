@@ -5,6 +5,7 @@ class ConditionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Column(
       children: [
         AppTextField(
@@ -32,17 +33,18 @@ class ConditionView extends StatelessWidget {
                     itemBuilder: (context, index) => catCard(),
                   ).paddingOnly(top: Appdimens.dimen20)
                 : GridView.builder(
-                   
                     itemCount: 4,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 1.9,
+                        childAspectRatio:
+                            Appdimens.screenHeight < 800 ? 1.6 : 1.9,
                         crossAxisSpacing: Appdimens.dimen20,
                         mainAxisSpacing: Appdimens.dimen20,
                         crossAxisCount: 2),
                     itemBuilder: (context, index) => catCard(),
                   ).paddingOnly(top: Appdimens.dimen20))
       ],
-    ).paddingSymmetric(horizontal: Appdimens.dimen20,vertical: Appdimens.dimen20);
+    ).paddingSymmetric(
+        horizontal: Appdimens.dimen20, vertical: Appdimens.dimen20);
   }
 
   catCard() => Card(
@@ -143,7 +145,7 @@ class ConditionView extends StatelessWidget {
                   Expanded(
                       child: Text(
                     'Confirmed',
-                    maxLines: 2,
+                    maxLines: 1,
                     style: Get.theme.textTheme.labelMedium!.copyWith(
                       color: AppColors.greenColor,
                     ),
