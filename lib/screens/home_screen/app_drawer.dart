@@ -1,4 +1,5 @@
 import 'package:pocket_clinic/utils/app_config.dart';
+import 'package:pocket_clinic/utils/app_function.dart';
 
 appDrwawer() => Drawer(
       child: ListView(
@@ -10,17 +11,22 @@ appDrwawer() => Drawer(
               .paddingOnly(top: Appdimens.dimen50)
               .align(alignment: Alignment.topLeft)
               .asButton(onTap: () => Get.back()),
-          getRow(AppStrings.logOut).paddingOnly(top: Appdimens.dimen50)
+          getRow(
+            AppStrings.logOut,
+            onTap: () => AppFunctions.logout(),
+          ).paddingOnly(
+            top: Appdimens.dimen50,
+          )
         ],
       ).paddingAll(Appdimens.dimen20),
     );
 
-Widget getRow(String title) => Container(
+Widget getRow(String title, {required dynamic Function() onTap}) => Container(
       height: Appdimens.dimen60,
       decoration: BoxDecoration(
           color: AppColors.primaryColor.withOpacity(0.1),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
-      padding:  EdgeInsets.symmetric(horizontal: Appdimens.dimen20),
+      padding: EdgeInsets.symmetric(horizontal: Appdimens.dimen20),
       child: Center(
         child: Row(
           children: [
@@ -35,4 +41,4 @@ Widget getRow(String title) => Container(
           ],
         ),
       ),
-    );
+    ).asButton(onTap: onTap);

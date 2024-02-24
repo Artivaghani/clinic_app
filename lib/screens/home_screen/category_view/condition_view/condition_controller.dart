@@ -35,8 +35,6 @@ class ConditionController extends GetxController {
         value['data'],
         style: Get.theme.textTheme.titleSmall,
       ));
-      isLoading = false;
-      update();
     }).onError((error, stackTrace) {
       Get.back();
       AppDialogs.errorSnackBar(error.toString());

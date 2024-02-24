@@ -233,11 +233,7 @@ class TimeLineview extends StatelessWidget {
                             AppConst.isMobile
                                 ? Appdimens.dimen8
                                 : Appdimens.dimen14),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: AppConst.isMobile
-                                ? Appdimens.dimen14
-                                : Appdimens.dimen22,
-                            horizontal: Appdimens.dimen20),
+                        contentPadding: EdgeInsets.zero,
                         onTap: () {},
                       ).paddingSymmetric(
                         vertical: AppConst.isMobile

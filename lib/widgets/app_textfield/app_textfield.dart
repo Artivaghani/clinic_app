@@ -19,25 +19,24 @@ class AppTextField extends StatelessWidget {
   final bool readOnly;
   final Decoration? decoration;
 
-  const AppTextField({
-    super.key,
-    this.hintText,
-    this.tag,
-    this.height,
-    this.controller,
-    this.focusNode,
-    this.contentPadding,
-    this.keyboardType,
-    this.obscureText = false,
-    this.onChanged,
-    this.validator,
-    this.maxLength,
-    this.color,
-    this.prefixIcon,
-    this.onTap,
-    this.readOnly = false,
-    this.decoration
-  });
+  const AppTextField(
+      {super.key,
+      this.hintText,
+      this.tag,
+      this.height,
+      this.controller,
+      this.focusNode,
+      this.contentPadding,
+      this.keyboardType,
+      this.obscureText = false,
+      this.onChanged,
+      this.validator,
+      this.maxLength,
+      this.color,
+      this.prefixIcon,
+      this.onTap,
+      this.readOnly = false,
+      this.decoration});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class AppTextField extends StatelessWidget {
           Container(
             width: double.infinity,
             height: height,
-            decoration:decoration?? AppDecoration.fieldDecoration(),
+            decoration: decoration ?? AppDecoration.fieldDecoration(),
             margin: EdgeInsets.only(top: Appdimens.dimen6),
             child: Center(
               child: TextFormField(
@@ -74,9 +73,11 @@ class AppTextField extends StatelessWidget {
                 maxLength: maxLength,
                 readOnly: readOnly,
                 textAlignVertical: TextAlignVertical.center,
+                textAlign: TextAlign.start,
                 decoration: InputDecoration(
                     hintText: hintText,
-                    hintStyle: Get.theme.textTheme.labelMedium,
+                    hintStyle:
+                        Get.theme.textTheme.labelMedium!.copyWith(height: 0),
                     suffixIcon: obscureText
                         ? GestureDetector(
                             onTap: () {
@@ -96,6 +97,8 @@ class AppTextField extends StatelessWidget {
                             ),
                           )
                         : null,
+                    isDense: true,
+                    isCollapsed: true,
                     prefixIcon: prefixIcon,
                     contentPadding: contentPadding ??
                         EdgeInsets.symmetric(

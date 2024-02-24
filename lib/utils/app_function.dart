@@ -1,4 +1,7 @@
 import 'package:intl/intl.dart';
+import 'package:pocket_clinic/api_helpers/api_manager.dart';
+import 'package:pocket_clinic/api_helpers/api_utils.dart';
+import 'package:pocket_clinic/screens/login_screen/login_screen.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
 
 class AppFunctions {
@@ -9,15 +12,16 @@ class AppFunctions {
   }
 
   static logout() async {
-    StorageHelper().removeUser();
-
-    await Get.deleteAll();
-    // Get.offUntil(
-    //     GetPageRoute(
-    //         page: () => LoginScreen(
-    //               isBack: false,
-    //             )),
-    //     (route) => false);
+    AppDialogs.showProcess();
+    ApiManager.callPost({}, ApiUtils.logout).then((value) async {
+      Get.back();
+      StorageHelper().removeUser();
+      await Get.deleteAll();
+      Get.offAll(() => LoginScreen());
+    }).onError((error, stackTrace) {
+      Get.back();
+      AppDialogs.errorSnackBar(error.toString());
+    });
   }
 
   static Future<bool> checkInternet() async {

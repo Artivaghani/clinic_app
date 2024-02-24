@@ -37,4 +37,6 @@ class HomeController extends GetxController {
     selectedCat = index;
     update();
   }
+
+
 }

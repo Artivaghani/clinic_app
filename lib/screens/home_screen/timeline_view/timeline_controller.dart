@@ -121,7 +121,7 @@ class TimeLineController extends GetxController {
     ).then((value) {
       Get.back();
       newNote.clear();
-      print(value.toString());
+     
       getData();
       AppDialogs.successSnackBar(value['message'].toString());
     }).onError((error, stackTrace) {

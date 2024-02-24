@@ -10,4 +10,5 @@ class ApiUtils {
   static String addNote = "visits/task/complete";
   static String condition = "categories/condition";
   static String info = "categories/info";
+  static String logout = "auth/logout";
 }
