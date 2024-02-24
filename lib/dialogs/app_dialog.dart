@@ -1,4 +1,5 @@
 import 'package:pocket_clinic/utils/app_config.dart';
+
 class AppDialogs {
   static showProcess() {
     return Get.dialog(
@@ -38,6 +39,49 @@ class AppDialogs {
             style: TextStyle(
                 fontSize: FontDimen.dimen14, color: AppColors.terneryColor),
           )),
+    );
+  }
+
+  static showCommonDialog(
+    Widget child,
+  ) {
+    showDialog(
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return PopScope(
+          canPop: false,
+          child: Dialog(
+            insetPadding: AppConst.isMobile
+                ? EdgeInsets.symmetric(
+                    vertical: Appdimens.dimen50,
+                    horizontal: Appdimens.dimen50)
+                : EdgeInsets.symmetric(
+                    vertical: Appdimens.dimen50,
+                    horizontal: Appdimens.dimen200),
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)), //this right here
+            child: Container(
+                decoration:
+                    AppDecoration.cardDecoration(color: AppColors.terneryColor),
+                padding: EdgeInsets.all(Appdimens.dimen20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    child,
+                    appButton(
+                      AppStrings.close,
+                      width: Appdimens.dimen200,
+                      height: Appdimens.dimen50,
+                      style: Get.theme.textTheme.bodySmall,
+                      onTap: () => Get.back(),
+                    ).paddingOnly(top: Appdimens.dimen20)
+                  ],
+                )),
+          ),
+        );
+      },
     );
   }
 }

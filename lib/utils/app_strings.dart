@@ -15,6 +15,8 @@ class AppStrings {
   static String completed = 'Completed'; 
   static String markAsDone = 'Mark as done'; 
   static String timeline = 'Timeline'; 
+  static String close = 'Close'; 
+  static String aIInsights = 'AI Insights'; 
   static String instructions = 'Instructions'; 
   static String categories = 'Categories'; 
   static String donHaveAccount = 'Don’t have an account ?';

@@ -1,4 +1,4 @@
-import 'package:pocket_clinic/screens/home_screen/category_view/condition_view.dart';
+import 'package:pocket_clinic/screens/home_screen/category_view/condition_view/condition_view.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
 
 class HomeController extends GetxController {

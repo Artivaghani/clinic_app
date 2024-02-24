@@ -8,4 +8,6 @@ class ApiUtils {
   static String visits = "visits";
   static String resources = "resources";
   static String addNote = "visits/task/complete";
+  static String condition = "categories/condition";
+  static String info = "categories/info";
 }

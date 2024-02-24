@@ -6,7 +6,7 @@ import 'package:pocket_clinic/utils/app_function.dart';
 
 class TimeLineview extends StatelessWidget {
   TimeLineview({super.key});
-  TextEditingController text = TextEditingController();
+  final TextEditingController text = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +113,7 @@ class TimeLineview extends StatelessWidget {
                           : Colors.transparent,
                     ).paddingOnly(top: Appdimens.dimen4)
                   ],
-                )
-                    .paddingOnly(
-                        right:  Appdimens.dimen20)
-                    .asButton(onTap: () {
+                ).paddingOnly(right: Appdimens.dimen20).asButton(onTap: () {
                   controller.selectedVisit = index;
                   controller.filterValue();
                 }),

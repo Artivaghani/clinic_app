@@ -5,6 +5,7 @@ Widget appButton(String title,
     double? width,
     TextStyle? style,
     double? height,
+    Widget? icon,
     Function()? onTap,
     BorderRadiusGeometry? borderRadius}) {
   return SizedBox(
@@ -21,11 +22,16 @@ Widget appButton(String title,
           ))),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(
-          title,
-          maxLines: 1,
-          textAlign: TextAlign.center,
-          style: style ?? Get.theme.textTheme.headlineSmall,
+        child: Row(
+          children: [
+            if (icon != null) icon.paddingOnly(right: Appdimens.dimen10),
+            Text(
+              title,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: style ?? Get.theme.textTheme.headlineSmall,
+            ),
+          ],
         ),
       ),
     ),

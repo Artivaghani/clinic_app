@@ -26,4 +26,5 @@ class AppImages {
   static String list = "assets/icons/list.png";
   static String star = "assets/icons/star.png";
   static String hostpital = "assets/icons/hostpital.png";
+  static String brain = "assets/icons/brain.png";
 }

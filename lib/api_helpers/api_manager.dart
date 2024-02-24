@@ -46,6 +46,11 @@ class ApiManager {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ${StorageHelper().getToken}'
                 });
+
+        if (endPoint == ApiUtils.info && response.statusCode == 200) {
+          finalresponse = {'data': response.body};
+          return finalresponse;
+        }
         finalresponse = checkResponse(response);
         return finalresponse;
       } on SocketException catch (_) {
@@ -62,7 +67,7 @@ class ApiManager {
       return data;
     } else if (response.statusCode == 401) {
       StorageHelper().removeUser();
-      
+
       throw data['message'];
     } else {
       throw AppStrings.errorMsg;

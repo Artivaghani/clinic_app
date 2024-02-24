@@ -1,57 +1,74 @@
+import 'package:pocket_clinic/screens/home_screen/category_view/condition_view/condition_controller.dart';
+import 'package:pocket_clinic/screens/home_screen/category_view/condition_view/condition_model.dart';
 import 'package:pocket_clinic/utils/app_config.dart';
+import 'package:pocket_clinic/utils/app_function.dart';
 
 class ConditionView extends StatelessWidget {
   const ConditionView({super.key});
 
   @override
   Widget build(BuildContext context) {
-   
-    return Column(
-      children: [
-        AppTextField(
-          hintText: AppStrings.searchConditions,
-          validator: AppValidation.checkEmpty,
-          prefixIcon: const Icon(Icons.search_rounded),
-        ),
-        Row(
-          children: [
-            Text(
-              '0 known Conditions',
-              style: Get.theme.textTheme.titleSmall!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: Appdimens.dimen16,
-            ).paddingOnly(left: Appdimens.dimen10)
-          ],
-        ).paddingOnly(top: Appdimens.dimen30),
-        Expanded(
-            child: AppConst.isMobile
-                ? ListView.builder(
-                    itemCount: 2,
-                    itemBuilder: (context, index) => catCard(),
-                  ).paddingOnly(top: Appdimens.dimen20)
-                : GridView.builder(
-                    itemCount: 4,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio:
-                            Appdimens.screenHeight < 800 ? 1.6 : 1.9,
-                        crossAxisSpacing: Appdimens.dimen20,
-                        mainAxisSpacing: Appdimens.dimen20,
-                        crossAxisCount: 2),
-                    itemBuilder: (context, index) => catCard(),
-                  ).paddingOnly(top: Appdimens.dimen20))
-      ],
-    ).paddingSymmetric(
-        horizontal: Appdimens.dimen20, vertical: Appdimens.dimen20);
+    return GetBuilder(
+        init: ConditionController(),
+        builder: (controller) {
+          return Column(
+            children: [
+              AppTextField(
+                hintText: AppStrings.searchConditions,
+                validator: AppValidation.checkEmpty,
+                prefixIcon: const Icon(Icons.search_rounded),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '${controller.conData.length} known Conditions',
+                    style: Get.theme.textTheme.titleSmall!
+                        .copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: Appdimens.dimen16,
+                  ).paddingOnly(left: Appdimens.dimen10)
+                ],
+              ).paddingOnly(top: Appdimens.dimen30),
+              Expanded(
+                  child: controller.isLoading
+                      ? AppWidgets.processIntegrator()
+                      : controller.conData.isEmpty
+                          ? AppWidgets.datanotfoundtext()
+                          : AppConst.isMobile
+                              ? ListView.builder(
+                                  itemCount: controller.conData.length,
+                                  itemBuilder: (context, index) =>
+                                      catCard(controller.conData[index],controller),
+                                ).paddingOnly(top: Appdimens.dimen20)
+                              : GridView.builder(
+                                  itemCount: controller.conData.length,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio:
+                                              Appdimens.screenHeight < 800
+                                                  ? 1.6
+                                                  : 1.9,
+                                          crossAxisSpacing: Appdimens.dimen20,
+                                          mainAxisSpacing: Appdimens.dimen20,
+                                          crossAxisCount: 2),
+                                  itemBuilder: (context, index) =>
+                                      catCard(controller.conData[index],controller),
+                                ).paddingOnly(top: Appdimens.dimen20))
+            ],
+          ).paddingSymmetric(
+              horizontal: Appdimens.dimen20, vertical: Appdimens.dimen20);
+        });
   }
 
-  catCard() => Card(
+  catCard(ConditionData conData, ConditionController controller) => Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        color: AppColors.greenColor,
+        color: conData.clinicalStatus == 'active'
+            ? AppColors.greenColor
+            : AppColors.greyColor,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 3,
         child: Container(
@@ -67,14 +84,18 @@ class ConditionView extends StatelessWidget {
                       Container(
                         height: Appdimens.dimen16,
                         width: Appdimens.dimen16,
-                        decoration: const BoxDecoration(
-                            color: AppColors.greenColor,
+                        decoration: BoxDecoration(
+                            color: conData.clinicalStatus == 'active'
+                                ? AppColors.greenColor
+                                : AppColors.greyColor,
                             shape: BoxShape.circle),
                       ),
                       Text(
-                        'Active',
+                        conData.clinicalStatus ?? '',
                         style: Get.theme.textTheme.labelMedium!.copyWith(
-                            color: AppColors.greenColor,
+                            color: conData.clinicalStatus == 'active'
+                                ? AppColors.greenColor
+                                : AppColors.greyColor,
                             fontWeight: FontWeight.w600),
                       ).paddingOnly(left: Appdimens.dimen6),
                     ],
@@ -87,7 +108,7 @@ class ConditionView extends StatelessWidget {
                         color: AppColors.greyColor,
                       ),
                       Text(
-                        'Jan 31, 2024',
+                        AppFunctions.getDateTime(conData.recordedDate??''),
                         style: Get.theme.textTheme.labelMedium!.copyWith(
                             color: AppColors.greyColor,
                             fontWeight: FontWeight.w500),
@@ -105,7 +126,7 @@ class ConditionView extends StatelessWidget {
                   ),
                   Expanded(
                       child: Text(
-                    'Schedule a follow-up appointment for a COVID-19 vaccine booster shot at Walgreen Co.',
+                    conData.display??'',
                     maxLines: 2,
                     style: Get.theme.textTheme.labelMedium!
                         .copyWith(color: AppColors.secondaryColor),
@@ -144,7 +165,7 @@ class ConditionView extends StatelessWidget {
                   ),
                   Expanded(
                       child: Text(
-                    'Confirmed',
+                    conData.verificationStatus??'',
                     maxLines: 1,
                     style: Get.theme.textTheme.labelMedium!.copyWith(
                       color: AppColors.greenColor,
@@ -161,7 +182,7 @@ class ConditionView extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      'Kaiser NC - Moscone Center COVID-19 Vaccination Hub',
+                     conData.org??'',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Get.theme.textTheme.labelMedium!.copyWith(
@@ -172,13 +193,14 @@ class ConditionView extends StatelessWidget {
                 ],
               ).paddingOnly(top: Appdimens.dimen14),
               appButton(
-                AppStrings.markAsDone,
+                AppStrings.aIInsights,
                 width: double.infinity,
                 style: Get.theme.textTheme.labelMedium!.copyWith(
                     color: AppColors.terneryColor, fontWeight: FontWeight.w500),
                 height:
                     AppConst.isMobile ? Appdimens.dimen50 : Appdimens.dimen50,
-                onTap: () {},
+                    icon: Image.asset(AppImages.brain,height: Appdimens.dimen20,),
+                onTap: () =>controller.getInfo(),
               ).paddingOnly(top: Appdimens.dimen20)
             ],
           ).paddingAll(
