@@ -1,7 +1,8 @@
-
+import 'dart:io';
 
 class ApiUtils {
-  static String get baseUrl => 'http://localhost:3000/'; 
+  static String get baseUrl =>
+      'http://${Platform.isAndroid ? '10.0.2.2' : 'localhost'}:3000/';
 
   //endpoint
   static String login = "auth/login";
