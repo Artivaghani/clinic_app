@@ -6,7 +6,11 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (controller) {
+     Appdimens.setSize(
+        MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (controller) {
       return AppConst.isMobile
           ? Column(
               children: [

@@ -12,7 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
+    Appdimens.setSize(
+        MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
     return GetBuilder(
         init: HomeController(),
         builder: (controller) {
@@ -29,8 +30,9 @@ class HomeScreen extends StatelessWidget {
                   const Icon(
                     Icons.help_outline_outlined,
                     color: AppColors.primaryColor,
-                  ).paddingOnly(right: Appdimens.dimen10).asButton(
-                      onTap: () => Get.to(const HelpScreen())),
+                  )
+                      .paddingOnly(right: Appdimens.dimen10)
+                      .asButton(onTap: () => Get.to(const HelpScreen())),
                 Container(
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor.withOpacity(0.2),

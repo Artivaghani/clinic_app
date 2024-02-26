@@ -23,12 +23,14 @@ class SplashScreen extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data! > 0) {
+              Appdimens.setSize(MediaQuery.of(context).size.height,
+                  MediaQuery.of(context).size.width);
               Future.delayed(
                 const Duration(seconds: 3),
                 () {
                   if (StorageHelper().isLoggedIn) {
-                  Get.offUntil(GetPageRoute(page: () => const HomeScreen()),
-                      (route) => false);
+                    Get.offUntil(GetPageRoute(page: () => const HomeScreen()),
+                        (route) => false);
                   } else {
                     Get.off(LoginScreen());
                   }

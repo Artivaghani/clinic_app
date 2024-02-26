@@ -10,6 +10,8 @@ class TimeLineview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     Appdimens.setSize(
+        MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
     return GetBuilder<TimeLineController>(
         init: TimeLineController(),
         builder: (controller) {
