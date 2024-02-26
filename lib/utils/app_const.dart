@@ -6,7 +6,7 @@ class AppConst {
   static const String appName = 'Pocket Clinic';
 
   static bool get isMobile => kIsWeb
-      ? Appdimens.screenWidth < 700
+      ? Appdimens.screenWidth < 800
           ? true
           : false
       : Platform.isAndroid || Platform.isIOS || Appdimens.screenWidth < 700;

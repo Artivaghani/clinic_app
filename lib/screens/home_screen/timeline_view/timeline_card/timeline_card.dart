@@ -240,7 +240,7 @@ class TimeLineCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'Complete the Egg Cryo labs as per the doctor\'s recommendation \nAttend appointments for EggCryo modules as schedule Follow the prescribed protocol for E2P 2/2 Inform MN about AFC at Baseline, CD3 E2, and the option for HCG + Lupron',
+                    visitData.validatedInstructionsForUser![index],
                     style: Get.theme.textTheme.labelMedium!
                         .copyWith(color: AppColors.secondaryColor),
                   ).paddingOnly(left: Appdimens.dimen10),
