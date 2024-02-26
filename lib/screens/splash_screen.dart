@@ -30,7 +30,7 @@ class SplashScreen extends StatelessWidget {
                   Get.offUntil(GetPageRoute(page: () => const HomeScreen()),
                       (route) => false);
                   } else {
-                    Get.off( LoginScreen());
+                    Get.off(LoginScreen());
                   }
                 },
               );
