@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
     Appdimens.setSize(
         MediaQuery.of(context).size.height, MediaQuery.of(context).size.width);
 
-    print(Appdimens.screenWidth);
+   
     return Scaffold(
       backgroundColor:
           AppConst.isMobile ? AppColors.terneryColor : AppColors.primaryColor,
